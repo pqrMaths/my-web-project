@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>簡單的 HTML 框架</title>
+    <!-- 樣式表 -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background: #0073e6;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        main {
+            padding: 1rem;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 0.5rem 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>歡迎來到我的網站</h1>
+        <nav>
+            <a href="#home">首頁</a>
+            <a href="#about">關於我們</a>
+            <a href="#contact">聯絡方式</a>
+        </nav>
+    </header>
+    <main>
+        <h2 id="home">首頁</h2>
+        <p>這是一個基本的 HTML 框架範例，你可以根據需要進行修改和擴展。</p>
 
+        <h2 id="about">關於我們</h2>
+        <p>我們是一個熱衷於學習與分享的團隊，致力於創造價值。</p>
+
+        <h2 id="contact">聯絡方式</h2>
+        <p>有任何問題，歡迎 <a href="mailto:example@example.com">聯絡我們</a>！</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 我的網站. 保留所有權利。</p>
+    </footer>
+</body>
+</html>
