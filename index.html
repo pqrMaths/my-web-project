@@ -21,7 +21,7 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 320px; /* 設定寬度為 320px，適合大部分手機 */
+            width: 320px;
         }
 
         .display {
@@ -90,33 +90,33 @@
         /* 手機響應式設計 */
         @media (max-width: 480px) {
             .calculator {
-                width: 280px; /* 在手機螢幕上縮小計算機寬度 */
+                width: 280px;
             }
 
             .button {
-                font-size: 16px; /* 讓按鈕的字體稍微小一點 */
-                padding: 15px; /* 減少按鈕的內邊距 */
+                font-size: 16px;
+                padding: 15px;
             }
 
             .display {
-                font-size: 20px; /* 顯示區域的字體也縮小 */
-                padding: 8px; /* 調整顯示區域的內邊距 */
+                font-size: 20px;
+                padding: 8px;
             }
         }
 
         @media (max-width: 320px) {
             .calculator {
-                width: 240px; /* 更小螢幕的設備 */
+                width: 240px;
             }
 
             .button {
-                font-size: 14px; /* 更小字體 */
-                padding: 12px; /* 減少按鈕大小 */
+                font-size: 14px;
+                padding: 12px;
             }
 
             .display {
-                font-size: 18px; /* 顯示區域的字體更小 */
-                padding: 6px; /* 顯示區域內邊距縮小 */
+                font-size: 18px;
+                padding: 6px;
             }
         }
     </style>
@@ -153,25 +153,47 @@
 <script>
     // 顯示區域
     let display = document.getElementById('display');
+    let history = [];  // 用來存儲歷史輸入狀態
 
     // 在顯示區域附加數字或運算符
     function appendToDisplay(value) {
+        history.push(display.value); // 保存當前顯示的狀態
         display.value += value;
     }
 
     // 清除顯示區域
     function clearDisplay() {
+        history.push(display.value); // 保存當前顯示的狀態
         display.value = '';
     }
 
     // 計算並顯示結果
     function calculate() {
         try {
+            history.push(display.value); // 保存當前顯示的狀態
             display.value = eval(display.value); // 使用 eval 進行運算
         } catch (error) {
             display.value = '錯誤'; // 捕獲錯誤並顯示
         }
     }
+
+    // 回車功能，撤銷操作
+    function undo() {
+        if (history.length > 0) {
+            display.value = history.pop(); // 還原到最後一次有效的狀態
+        }
+    }
+
+    // 監聽鍵盤事件，使用回車鍵執行計算，Backspace 返回
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            calculate();
+        } else if (event.key === 'Backspace') {
+            undo();
+        } else if (event.key.match(/[0-9+\-*/.]/)) {
+            appendToDisplay(event.key);
+        }
+    });
 </script>
 
 </body>
