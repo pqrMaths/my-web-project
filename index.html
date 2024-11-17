@@ -4,63 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>簡單的 HTML 框架</title>
-    <!-- 樣式表 -->
+    <title>簡單計算機</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
         }
-        header {
-            background: #0073e6;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
+
+        .calculator {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        main {
-            padding: 1rem;
+
+        .display {
+            width: 200px;
+            height: 40px;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #fafafa;
         }
-        footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 0.5rem 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
         }
-        nav a {
-            margin: 0 1rem;
-            text-decoration: none;
-            color: #fff;
+
+        .button {
+            padding: 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .button:active {
+            background-color: #d0d0d0;
+        }
+
+        .button.operator {
+            background-color: #f9c74f;
+        }
+
+        .button.operator:hover {
+            background-color: #f9b72f;
+        }
+
+        .button.clear {
+            background-color: #e63946;
+            color: white;
+        }
+
+        .button.clear:hover {
+            background-color: #d62931;
+        }
+
+        .button.equals {
+            background-color: #2a9d8f;
+            color: white;
+        }
+
+        .button.equals:hover {
+            background-color: #1f7d6c;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>歡迎來到我的網站</h1>
-        <nav>
-            <a href="#home">首頁</a>
-            <a href="#about">關於我們</a>
-            <a href="#contact">聯絡方式</a>
-        </nav>
-    </header>
-    <main>
-        <h2 id="home">首頁</h2>
-        <p>這是一個基本的 HTML 框架範例，你可以根據需要進行修改和擴展。</p>
 
-        <h2 id="about">關於我們</h2>
-        <p>我們是一個熱衷於學習與分享的團隊，致力於創造價值。</p>
+<div class="calculator">
+    <input type="text" id="display" class="display" disabled>
+    <div class="button-container">
+        <button class="button clear" onclick="clearDisplay()">C</button>
+        <button class="button operator" onclick="appendToDisplay('/')">/</button>
+        <button class="button operator" onclick="appendToDisplay('*')">*</button>
+        <button class="button operator" onclick="appendToDisplay('-')">-</button>
 
-        <h2 id="contact">聯絡方式</h2>
-        <p>有任何問題，歡迎 <a href="mailto:example@example.com">聯絡我們</a>！</p>
-    </main>
-    <footer>
-        <p>&copy; 2024 我的網站. 保留所有權利。</p>
-    </footer>
+        <button class="button" onclick="appendToDisplay('7')">7</button>
+        <button class="button" onclick="appendToDisplay('8')">8</button>
+        <button class="button" onclick="appendToDisplay('9')">9</button>
+        <button class="button operator" onclick="appendToDisplay('+')">+</button>
+
+        <button class="button" onclick="appendToDisplay('4')">4</button>
+        <button class="button" onclick="appendToDisplay('5')">5</button>
+        <button class="button" onclick="appendToDisplay('6')">6</button>
+        <button class="button equals" onclick="calculate()">=</button>
+
+        <button class="button" onclick="appendToDisplay('1')">1</button>
+        <button class="button" onclick="appendToDisplay('2')">2</button>
+        <button class="button" onclick="appendToDisplay('3')">3</button>
+        <button class="button" onclick="appendToDisplay('0')">0</button>
+
+        <button class="button" onclick="appendToDisplay('.')">.</button>
+    </div>
+</div>
+
+<script>
+    // 顯示區域
+    let display = document.getElementById('display');
+
+    // 在顯示區域附加數字或運算符
+    function appendToDisplay(value) {
+        display.value += value;
+    }
+
+    // 清除顯示區域
+    function clearDisplay() {
+        display.value = '';
+    }
+
+    // 計算並顯示結果
+    function calculate() {
+        try {
+            display.value = eval(display.value); // 使用 eval 進行運算
+        } catch (error) {
+            display.value = '錯誤'; // 捕獲錯誤並顯示
+        }
+    }
+</script>
+
 </body>
 </html>
